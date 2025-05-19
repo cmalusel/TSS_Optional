@@ -1,0 +1,14 @@
+
+
+Code Coverage Report:     
+  2025-05-16 17:34:59     
+                          
+ Summary:                 
+  Classes: 100.00% (2/2)  
+  Methods: 100.00% (3/3)  
+  Lines:   100.00% (55/55)
+
+src\Box
+  Methods: 100.00% ( 1/ 1)   Lines: 100.00% (  4/  4)
+src\ShippingCalculator
+  Methods: 100.00% ( 2/ 2)   Lines: 100.00% ( 51/ 51)
