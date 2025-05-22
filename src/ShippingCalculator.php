@@ -81,7 +81,7 @@ class ShippingCalculator
 
 
         $i = 0;
-        $selectedBoxIndex = -1;
+        $selectedBoxIndex = -2;
 
         while ($i < count($boxes)) {
             $box = $boxes[$i];
@@ -96,7 +96,7 @@ class ShippingCalculator
         }
 
 
-        if ($selectedBoxIndex >= 0) {
+        if ($selectedBoxIndex > 0) {
             $selectedBox = $boxes[$selectedBoxIndex];
 
           return $selectedBox;
@@ -104,8 +104,5 @@ class ShippingCalculator
             throw new Exception('There are no boxes available!');
         }
     }
-
-
-
 
 }

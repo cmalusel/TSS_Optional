@@ -8,6 +8,10 @@ class ShippingCalculatorTest extends TestCase
 {
     private  $shippingCalculator;
 
+    /**
+     * Functional Testing Below
+     */
+
     public function testItShouldThrowErrorWhenNegativeValuesAreInserted()
     {
         $this->expectException(InvalidArgumentException::class);
@@ -32,18 +36,38 @@ class ShippingCalculatorTest extends TestCase
         $this -> assertEquals(26.0, $total);
     }
 
-    public function testItShouldSelectAnEmptyBox() {
-        $box = $this->shippingCalculator->selectLockerBox(20.0, 20.0, 20.0);
-
-        $this->assertEquals(new Box(40, 30, 20, true), $box);
-    }
-
     public function testItShouldNotFindAnBox() {
         $this->expectException(Exception::class);
         $box = $this->shippingCalculator->selectLockerBox(200.0, 200.0, 200.0);
 
     }
 
+    /**
+     * Structural Testing Below
+    */
+    public function testItShouldSelectAnEmptyBox() {
+        $box = $this->shippingCalculator->selectLockerBox(20.0, 20.0, 20.0);
+
+        $this->assertEquals(new Box(40, 30, 20, true), $box);
+    }
+    public function testItShouldCheckSurchargeMappingStructure() {
+
+        $reflection = new ReflectionClass(ShippingCalculator::class);
+
+        $method = $reflection->getMethod('calculatePriceAccordingToSizeAndWeight');
+
+        $method->setAccessible(true);
+
+        $result = $this->shippingCalculator->calculatePriceAccordingToSizeAndWeight(20, 20, 20, 10, 'fragile');
+
+        $this->assertEquals(23.0, $result);
+    }
+    public function testIsShouldMarkBoxAsOccupied() {
+
+        $box = $this->shippingCalculator->selectLockerBox(20.0, 20.0, 20.0);
+
+        $this->assertTrue($box->isOccupied);
+    }
 
     protected function setUp(): void
     {
